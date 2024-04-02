@@ -1,0 +1,38 @@
+# Use the official lightweight Python image
+FROM python:3.8-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the dependencies file to the working directory
+COPY requirements.txt .
+
+# Install any dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the content of the local src directory to the working directory
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 5000
+
+# Command to run the application
+CMD ["python", "app.py"]
+
+Make sure you have a file named requirements.txt in the same directory as your Dockerfile. This file should list all Python dependencies required by your Flask application. You can generate it by running:
+
+bash
+pip freeze > requirements.txt
+After creating the Dockerfile and requirements.txt, you can build your Docker image by running:
+
+bash
+docker build -t flask-app .
+And then you can run your Docker container:
+
+bash
+docker run -p 5000:5000 flask-app
+Replace app.py with the name of your Flask application file if it's different. Also, make sure your model.pkl file is present in the same directory as your Flask application file.

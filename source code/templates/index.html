@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Approval Predictor</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+
+<body>
+ <style>
+        .login {
+            text-align: center;
+            margin: 0 auto; /* This will center the element horizontally */
+            
+        }
+    </style>
+
+<div class="container">
+ <div class="card">
+ <div class="login">
+	
+    <h1 style="text-align: center;">Loan Approval Predictor</h1>
+
+  
+    <form action="{{ url_for('predict')}}"method="post">
+           <label for="Gender">Gender:</label>
+                <select id="Gender" name="Gender">
+                        <option value="">Gender</option>
+			<option value="1">Male</option>
+			<option value="0">Female</option>
+		</select><br><br>
+
+<script>
+    // Function to validate the gender input
+    function validateGenderInput() {
+        var genderInput = document.getElementById("genderInput").value.toLowerCase(); // Convert input to lowercase for case-insensitive comparison
+
+        // Check if the input value is either "1" or "0"
+        if (genderInput !== "1" && genderInput !== "0") {
+            alert("Invalid value for Gender. Please enter either '1' or '0'.");
+            document.getElementById("genderInput").value = ""; // Clear the input field
+            return false;
+        }
+
+        return true; // Input is valid
+    }
+
+    // Add event listener to form submission to validate gender input
+    document.querySelector("form").addEventListener("submit", function (event) {
+        if (!validateGenderInput()) {
+            event.preventDefault(); // Prevent form submission if gender input is invalid
+        }
+    });
+</script>
+               <label for="Married">Marital Status:</label>
+               <select id="Married" name="Married">
+                        <option value="">Marital Status</option>
+			<option value="1">Married</option>
+			<option value="0">Unmarried</option>
+		</select><br><br>
+
+<script>
+    // Function to validate the married input
+    function validateMarriedInput() {
+        var marriedInput = document.getElementById("marriedInput").value.toLowerCase(); // Convert input to lowercase for case-insensitive comparison
+
+        // Check if the input value is either "1" or "0"
+        if (marriedInput !== "1" && marriedInput !== "0") {
+            alert("Invalid value for Married. Please enter either '1' or '0'.");
+            document.getElementById("marriedInput").value = ""; // Clear the input field
+            return false;
+        }
+
+        return true; // Input is valid
+    }
+
+    // Add event listener to form submission to validate married input
+    document.querySelector("form").addEventListener("submit", function (event) {
+        if (!validateMarriedInput()) {
+            event.preventDefault(); // Prevent form submission if married input is invalid
+        }
+    });
+</script>
+                <label for="Dependents">Dependents:</label>
+		<select id="Dependents" name="Dependents">
+                        <option value="">No.of Dependents</option>
+			<option value="0">0</option>
+			<option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+		</select><br><br>
+
+<script>
+    // Function to validate the dependents input
+    function validateDependentsInput() {
+        var dependentsInput = document.getElementById("dependentsInput").value;
+
+        // List of allowed values for dependents
+        var allowedValues = ["0","1", "2", "3", "4"];
+
+        // Check if the input value is one of the allowed values
+        if (!allowedValues.includes(dependentsInput)) {
+            alert("Invalid value for Dependents. Please enter either '0','1', '2', '3', or '4'.");
+            document.getElementById("dependentsInput").value = ""; // Clear the input field
+            return false;
+        }
+
+        return true; // Input is valid
+    }
+
+    // Add event listener to form submission to validate dependents input
+    document.querySelector("form").addEventListener("submit", function (event) {
+        if (!validateDependentsInput()) {
+            event.preventDefault(); // Prevent form submission if dependents input is invalid
+        }
+    });
+</script>
+
+                <label for="Education">Education:</label>
+                <select id="Education" name="Education">
+                        <option value="">Education</option>
+			<option value="1">Graduate</option>
+			<option value="0">Not Graduate</option>
+		</select><br><br>
+		
+<script>
+    // Function to validate the education input
+    function validateEducationInput() {
+        var educationInput = document.getElementById("educationInput").value.toLowerCase(); // Convert input to lowercase for case-insensitive comparison
+
+        // Check if the input value is either "1" or "0"
+        if (educationInput !== "1" && educationInput !== "0") {
+            alert("Invalid value for Education. Please enter either '1' or '0'.");
+            document.getElementById("educationInput").value = ""; // Clear the input field
+            return false;
+        }
+
+        return true; // Input is valid
+    }
+
+    // Add event listener to form submission to validate education input
+    document.querySelector("form").addEventListener("submit", function (event) {
+        if (!validateEducationInput()) {
+            event.preventDefault(); // Prevent form submission if education input is invalid
+        }
+    });
+</script>
+                <label for="Self_Employed">Self_Employed:</label>
+		<select id="Self_Employed" name="Self_Employed">
+                        <option value="">Self_Employed</option>
+			<option value="1">Yes</option>
+			<option value="0">No</option>
+		</select><br><br>
+
+<script>
+    // Function to validate the self-employed input
+    function validateSelfEmployedInput() {
+        var selfEmployedInput = document.getElementById("selfEmployedInput").value.toLowerCase(); // Convert input to lowercase for case-insensitive comparison
+
+        // Check if the input value is either "1" or "0"
+        if (selfEmployedInput !== "1" && selfEmployedInput !== "0") {
+            alert("Invalid value for Self_Employed. Please enter either '1' or '0'.");
+            document.getElementById("selfEmployedInput").value = ""; // Clear the input field
+            return false;
+        }
+
+        return true; // Input is valid
+    }
+
+    // Add event listener to form submission to validate self-employed input
+    document.querySelector("form").addEventListener("submit", function (event) {
+        if (!validateSelfEmployedInput()) {
+            event.preventDefault(); // Prevent form submission if self-employed input is invalid
+        }
+    });
+</script>
+
+		<label for="ApplicantIncome">ApplicantIncome:</label>
+		
+                <input type="number" min=0 max=1000000000 id="ApplicantIncome" name="ApplicantIncome" placeholder="ApplicantIncome" required><br><br>
+                <label for="CoapplicantIncome">CoapplicantIncome:</label>
+		<input type="number" name="CoapplicantIncome"  min=0 max=1000000000 placeholder="CoapplicantIncome" required="required" /><br><br>
+                <label for="LoanAmount">LoanAmount:</label>
+		<input type="number" name="LoanAmount"  min=0 max=1000000000 placeholder="LoanAmount" required="required" /><br><br>
+                <label for="Loan_Amount_Term">Loan_Amount_Term:</label>
+		<input type="number" name="Loan_Amount_Term" max=800 placeholder="Loan_Amount_Term" required="required" /><br><br>
+                <label for="Credit_History">Credit_History:</label>
+		<input type="number" name="Credit_History" id="creditHistoryInput" placeholder="Credit_History" required="required" /><br><br>
+
+<script>
+    // Function to validate the credit history input
+    function validateCreditHistoryInput() {
+        var creditHistoryInput = document.getElementById("creditHistoryInput").value.toLowerCase(); // Convert input to lowercase for case-insensitive comparison
+
+        // Check if the input value is either "1" or "0"
+        if (creditHistoryInput !== "1" && creditHistoryInput !== "0") {
+            alert("Invalid value for Credit_History. Please enter either '1' or '0'.");
+            document.getElementById("creditHistoryInput").value = ""; // Clear the input field
+            return false;
+        }
+
+        return true; // Input is valid
+    }
+
+    // Add event listener to form submission to validate credit history input
+    document.querySelector("form").addEventListener("submit", function (event) {
+        if (!validateCreditHistoryInput()) {
+            event.preventDefault(); // Prevent form submission if credit history input is invalid
+        }
+    });
+</script>
+        <label for="Property_Area">Property_Area:</label>
+	<select id="Property_Area" name="Property_Area">
+                        <option value="">Property_Area</option>
+			<option value="0">Rural</option>
+			<option value="1">Urban</option>
+                        <option value="2">Semi Urban</option>
+		</select><br><br>
+
+<script>
+    // Function to validate the property area input
+    function validatePropertyAreaInput() {
+        var propertyAreaInput = document.getElementById("propertyAreaInput").value.toLowerCase(); // Convert input to lowercase for case-insensitive comparison
+
+        // Check if the input value is either "1" or "0"
+        if (propertyAreaInput !== "1" && propertyAreaInput !== "0") {
+            alert("Invalid value for Property_Area. Please enter either '1' or '0'.");
+            document.getElementById("propertyAreaInput").value = ""; // Clear the input field
+            return false;
+        }
+
+        return true; // Input is valid
+    }
+
+    // Add event listener to form submission to validate property area input
+    document.querySelector("form").addEventListener("submit", function (event) {
+        if (!validatePropertyAreaInput()) {
+            event.preventDefault(); // Prevent form submission if property area input is invalid
+        }
+    });
+</script>
+
+		
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+</div>
+</div>
+
+</body>
+</html>
